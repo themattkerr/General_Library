@@ -1,8 +1,15 @@
 #ifndef MATTCALCULATIONS
 #define MATTCALCULATIONS
 
-#define VERSION_OF_MATTCALCULATIONS "1.2.8" //1/1/2018
+#define VERSION_OF_MATTCALCULATIONS "1.2.11" //5/2/2018
 /*
+ *
+ *
+ * build 10
+ *
+ * added isALetter()
+ * String to milliseconds returns -1 if conversion fails.
+ * 9 cleaned up some warnings
  * changed millisecondsToHoursMinsSec to take in an unsigned int
  */
 
@@ -81,6 +88,9 @@ QString drawLine(int nLength, char chCharToUse);
 
 QString spaceOut(QString strInput);
 QString spaceOut(QString strInput, int nNumOfChars, int chCharToUse);
+QString removeAllLettersFromString(QString strInputString);
+
+bool isALetter(QChar chInput);
 
 #endif // MATTCALCULATIONS
 

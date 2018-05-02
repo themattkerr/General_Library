@@ -7,7 +7,7 @@
 bool doubleIsEqual (double x, double y, unsigned int nNumberOfDecimalPlaces)
 {
     int nMultiplyer = 1;
-    for(int iii = 1; iii <= nNumberOfDecimalPlaces; iii++)
+    for(unsigned int iii = 1; iii <= nNumberOfDecimalPlaces; iii++)
         nMultiplyer *= 10;
     return (static_cast<int>(x*nMultiplyer + 0.5) == static_cast<int>(y*nMultiplyer + 0.5));
 }
@@ -127,9 +127,11 @@ int stringToMilliseconds (QString strTime)
     if (!ok)
     {
         QMessageBox ConversionFail;
+
         ConversionFail.setText("Error! Time conversion failure. Time will not be logged");
         ConversionFail.exec();
-        return 0;
+        ConversionFail.raise();
+        return -1;
     }
     if (nTotalMilliseconds < 0)
         return 0;
@@ -485,7 +487,7 @@ double roundDoubleToPoints(double dInput, unsigned int nNumberOfDecimalPlaces )
 {
     double dTemp = 0;
 
-    for(int iii = 1; iii <= nNumberOfDecimalPlaces; iii++)
+    for(unsigned int iii = 1; iii <= nNumberOfDecimalPlaces; iii++)
     {
         dInput = dInput * 10;
     }
@@ -496,7 +498,7 @@ double roundDoubleToPoints(double dInput, unsigned int nNumberOfDecimalPlaces )
         dTemp = static_cast<int>(dInput - .5);
     }
 
-    for(int iii = 1; iii <= nNumberOfDecimalPlaces; iii++)
+    for(unsigned int iii = 1; iii <= nNumberOfDecimalPlaces; iii++)
     {
         dTemp = dTemp / 10;
     }
@@ -507,7 +509,7 @@ double roundDoubleToPoints(double dInput, unsigned int nNumberOfDecimalPlaces )
 QString addCommasToDouble(double dInput, unsigned int nNumberOfDecimalPlaces)
 {
     dInput = roundDoubleToPoints(dInput, nNumberOfDecimalPlaces);
-    for(int iii = 1; iii <= nNumberOfDecimalPlaces; iii++)
+    for(unsigned int iii = 1; iii <= nNumberOfDecimalPlaces; iii++)
     {
         dInput = dInput*10;
     }
@@ -541,7 +543,7 @@ QString addCommasToString (QString strInput)
 
 QString addDecimalPoint (QString strInput, unsigned int nNumberOfDecimalPlaces)
 {
-    if(nNumberOfDecimalPlaces > 0 && nNumberOfDecimalPlaces <= strInput.length())
+    if(nNumberOfDecimalPlaces > 0 && static_cast<int>(nNumberOfDecimalPlaces) <= strInput.length())
     {
         QString strOutput = reverseQString(strInput);
         strOutput.insert(nNumberOfDecimalPlaces, '.');
@@ -555,7 +557,7 @@ QString reverseQString(QString strInput)
 {
     QString strOutput;
     QString strTemp = strInput;
-    int nLength = strTemp.length();
+    //int nLength = strTemp.length();
     int nCurrentLength = strTemp.length();
     int nEndIndex = nCurrentLength - 1;
     for(int iii = 0; iii < (nCurrentLength/2); iii++)
@@ -610,4 +612,97 @@ QString spaceOut(QString strInput, int nNumOfChars, int chCharToUse)
         strOutput.append(chCharToUse);
     }
     return strOutput;
+}
+
+QString removeAllLettersFromString(QString strInputString)
+{
+    QString strOutput = strInputString;
+
+    strOutput
+            .remove('A').remove('a')
+            .remove('B').remove('b')
+            .remove('C').remove('c')
+            .remove('D').remove('d')
+            .remove('E').remove('e')
+            .remove('F').remove('f')
+            .remove('G').remove('g')
+            .remove('H').remove('h')
+            .remove('I').remove('i')
+            .remove('J').remove('j')
+            .remove('K').remove('k')
+            .remove('L').remove('l')
+            .remove('M').remove('m')
+            .remove('N').remove('n')
+            .remove('O').remove('o')
+            .remove('P').remove('p')
+            .remove('Q').remove('q')
+            .remove('R').remove('r')
+            .remove('S').remove('s')
+            .remove('T').remove('t')
+            .remove('U').remove('u')
+            .remove('V').remove('v')
+            .remove('W').remove('w')
+            .remove('X').remove('x')
+            .remove('Y').remove('y')
+            .remove('Z').remove('z')
+            ;
+    return strOutput;
+}
+bool isALetter(QChar chInput)
+{
+
+        if (chInput == 'a') return true;
+        if (chInput == 'b') return true;
+        if (chInput == 'c') return true;
+        if (chInput == 'd') return true;
+        if (chInput == 'e') return true;
+        if (chInput == 'f') return true;
+        if (chInput == 'g') return true;
+        if (chInput == 'h') return true;
+        if (chInput == 'i') return true;
+        if (chInput == 'j') return true;
+        if (chInput == 'k') return true;
+        if (chInput == 'l') return true;
+        if (chInput == 'm') return true;
+        if (chInput == 'n') return true;
+        if (chInput == 'o') return true;
+        if (chInput == 'p') return true;
+        if (chInput == 'q') return true;
+        if (chInput == 'r') return true;
+        if (chInput == 's') return true;
+        if (chInput == 't') return true;
+        if (chInput == 'u') return true;
+        if (chInput == 'v') return true;
+        if (chInput == 'w') return true;
+        if (chInput == 'x') return true;
+        if (chInput == 'y') return true;
+        if (chInput == 'z') return true;
+        if (chInput == 'A') return true;
+        if (chInput == 'B') return true;
+        if (chInput == 'C') return true;
+        if (chInput == 'D') return true;
+        if (chInput == 'E') return true;
+        if (chInput == 'F') return true;
+        if (chInput == 'G') return true;
+        if (chInput == 'H') return true;
+        if (chInput == 'I') return true;
+        if (chInput == 'J') return true;
+        if (chInput == 'K') return true;
+        if (chInput == 'L') return true;
+        if (chInput == 'M') return true;
+        if (chInput == 'N') return true;
+        if (chInput == 'O') return true;
+        if (chInput == 'P') return true;
+        if (chInput == 'Q') return true;
+        if (chInput == 'R') return true;
+        if (chInput == 'S') return true;
+        if (chInput == 'T') return true;
+        if (chInput == 'U') return true;
+        if (chInput == 'V') return true;
+        if (chInput == 'W') return true;
+        if (chInput == 'X') return true;
+        if (chInput == 'Y') return true;
+        if (chInput == 'Z') return true;
+
+    return false;
 }
